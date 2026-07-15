@@ -68,15 +68,16 @@ function onVisibility(visible) {
 .dialog-title {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   font-weight: 600;
+  font-size: 1.5rem;
 }
 .title-icon {
   display: inline-flex;
 }
 .title-icon :deep(svg) {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
 }
 .legend {
   display: flex;
