@@ -11,6 +11,10 @@ project folder. Two front ends share one logic core:
 This replaces the old manual workflow (search fonts.google.com → download SVG →
 run a regex shell script → copy into the project).
 
+### ▶️ [Open the live app](https://noxieee.github.io/material-icon-wizard/)
+
+<https://noxieee.github.io/material-icon-wizard/>
+
 > **Status:** all packages (`core`, `cli`, `web`) are implemented and tested,
 > and CI/CD workflows are in place. See [`PLAN.md`](./PLAN.md) for the full
 > design and [roadmap](#roadmap).
@@ -154,20 +158,3 @@ npm test -w @material-icon-wizard/core
 2. ✅ `cli` — `add` command, filesystem export with conflict handling (+ tests)
 3. ✅ `web` — search + gallery + color verification + inspector + export (+ tests)
 4. ✅ CI/CD — GitHub Actions for lint/test (`ci.yml`) and Pages deploy (`deploy-web.yml`)
-
-## Continuous integration & deployment
-
-- **`.github/workflows/ci.yml`** — on every push/PR, runs `npm ci`, lint,
-  format check, and the full test suite (Node 22).
-- **`.github/workflows/deploy-web.yml`** — on push to `main`, builds
-  `packages/web` and publishes it to GitHub Pages.
-
-**One-time repo setup** (after creating the repo and pushing `main`):
-
-1. The repo must be named **`material-icon-wizard`** so the Vite `base`
-   (`/material-icon-wizard/`) matches the Pages project-site subpath.
-2. In **Settings → Pages → Build and deployment**, set **Source** to
-   **GitHub Actions**.
-
-The site then deploys automatically on each push to `main`, at
-`https://<owner>.github.io/material-icon-wizard/`.
