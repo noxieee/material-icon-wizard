@@ -1,6 +1,7 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Dialog from 'primevue/dialog';
+import Button from 'primevue/button';
 import { computeDiffHtml } from '../diffHtml.js';
 
 const props = defineProps({
@@ -11,6 +12,23 @@ const emit = defineEmits(['close']);
 const diff = computed(() =>
   props.item ? computeDiffHtml(props.item.rawSvg, props.item.transformedSvg) : null,
 );
+
+// Which block was just copied, for transient button feedback.
+const copied = ref(null);
+
+async function copy(which) {
+  const text = which === 'raw' ? props.item?.rawSvg : props.item?.transformedSvg;
+  if (text == null) return;
+  try {
+    await navigator.clipboard.writeText(text);
+    copied.value = which;
+    setTimeout(() => {
+      if (copied.value === which) copied.value = null;
+    }, 1500);
+  } catch {
+    // Clipboard unavailable (e.g. insecure context) — nothing to do.
+  }
+}
 
 function onVisibility(visible) {
   if (!visible) emit('close');
@@ -45,7 +63,19 @@ function onVisibility(visible) {
       </p>
       <div class="cols">
         <div class="col">
-          <h4>Raw</h4>
+          <div class="col-head">
+            <h4>Raw</h4>
+            <Button
+              v-tooltip.top="copied === 'raw' ? 'Copied!' : 'Copy'"
+              :icon="copied === 'raw' ? 'pi pi-check' : 'pi pi-copy'"
+              text
+              rounded
+              severity="secondary"
+              aria-label="Copy raw source"
+              :disabled="!item.rawSvg"
+              @click="copy('raw')"
+            />
+          </div>
           <!-- eslint-disable vue/no-v-html -->
           <!-- content is HTML-escaped in computeDiffHtml; only span tags added -->
           <pre v-if="diff" class="code" v-html="diff.raw"></pre>
@@ -53,7 +83,19 @@ function onVisibility(visible) {
           <pre v-else class="code">{{ item.rawSvg ?? '(none)' }}</pre>
         </div>
         <div class="col">
-          <h4>Transformed</h4>
+          <div class="col-head">
+            <h4>Transformed</h4>
+            <Button
+              v-tooltip.top="copied === 'transformed' ? 'Copied!' : 'Copy'"
+              :icon="copied === 'transformed' ? 'pi pi-check' : 'pi pi-copy'"
+              text
+              rounded
+              severity="secondary"
+              aria-label="Copy transformed source"
+              :disabled="!item.transformedSvg"
+              @click="copy('transformed')"
+            />
+          </div>
           <!-- eslint-disable vue/no-v-html -->
           <pre v-if="diff" class="code" v-html="diff.transformed"></pre>
           <!-- eslint-enable vue/no-v-html -->
@@ -85,8 +127,8 @@ function onVisibility(visible) {
   margin: 0 0 0.75rem;
 }
 .chip {
-  font-size: 0.7rem;
-  padding: 0.1rem 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.15rem 0.6rem;
   border-radius: 999px;
 }
 .cols {
@@ -99,8 +141,14 @@ function onVisibility(visible) {
     grid-template-columns: 1fr;
   }
 }
+.col-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
 h4 {
-  margin: 0 0 0.5rem;
+  margin: 0;
 }
 .code {
   margin: 0;
@@ -108,7 +156,7 @@ h4 {
   border-radius: 8px;
   background: var(--p-surface-100, #f1f5f9);
   overflow-x: auto;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   white-space: pre-wrap;
   word-break: break-all;
 }
