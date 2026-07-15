@@ -18,10 +18,11 @@
     "@eslint/js": "^9.18.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.33.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2"
   },
   "allowScripts": {
-    "esbuild@0.28.1": true
+    "esbuild@0.25.12": true
   }
 }

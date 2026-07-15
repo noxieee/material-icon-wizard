@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import pluginVue from 'eslint-plugin-vue';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
 
@@ -7,6 +8,7 @@ export default [
     ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**'],
   },
   js.configs.recommended,
+  ...pluginVue.configs['flat/recommended'],
   {
     languageOptions: {
       ecmaVersion: 2023,
@@ -18,6 +20,11 @@ export default [
         ...globals.browser,
       },
     },
+    rules: {
+      // App.vue is a legitimate single-word root component.
+      'vue/multi-word-component-names': 'off',
+    },
   },
+  // Prettier last so it wins on formatting-related rules (incl. vue's).
   prettier,
 ];
