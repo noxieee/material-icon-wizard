@@ -56,7 +56,7 @@ function retransformAll() {
         <span class="count">{{ store.items.length }} selected icon(s)</span>
         <span class="spacer"></span>
         <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
-        <Button label="Remove all" icon="pi pi-trash" severity="danger" @click="store.clear" />
+        <Button label="Remove all" icon="pi pi-trash" severity="danger" text @click="store.clear" />
         <span class="toolbar-divider" aria-hidden="true"></span>
         <ExportPanel :items="store.items" />
       </div>
