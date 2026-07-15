@@ -61,6 +61,7 @@ const color = ref(SWATCHES[0]);
         icon="pi pi-code"
         text
         rounded
+        severity="secondary"
         aria-label="Inspect source"
         @click="emit('inspect', item)"
       />
@@ -68,6 +69,7 @@ const color = ref(SWATCHES[0]);
         icon="pi pi-refresh"
         text
         rounded
+        severity="secondary"
         aria-label="Re-run transform"
         @click="emit('retransform', item)"
       />

@@ -6,5 +6,13 @@ import App from './App.vue';
 import './style.css';
 
 createApp(App)
-  .use(PrimeVue, { theme: { preset: Aura } })
+  .use(PrimeVue, {
+    theme: {
+      preset: Aura,
+      // Pin to light mode. Aura's darkModeSelector defaults to 'system', so its
+      // components and tokens would follow the OS and clash with the app's
+      // light chrome; `false` disables dark entirely for one consistent theme.
+      options: { darkModeSelector: false },
+    },
+  })
   .mount('#app');

@@ -30,7 +30,9 @@ function installFetchMock() {
 
 function mountApp() {
   return mount(App, {
-    global: { plugins: [[PrimeVue, { theme: { preset: Aura } }]] },
+    global: {
+      plugins: [[PrimeVue, { theme: { preset: Aura, options: { darkModeSelector: false } } }]],
+    },
   });
 }
 
