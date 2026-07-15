@@ -51,7 +51,7 @@ function retransformAll() {
 
     <section class="block">
       <div v-if="store.items.length" class="toolbar">
-        <span class="count">{{ store.items.length }} icon(s)</span>
+        <span class="count">{{ store.items.length }} selected icon(s)</span>
         <span class="spacer"></span>
         <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
         <ExportPanel :items="store.items" />
