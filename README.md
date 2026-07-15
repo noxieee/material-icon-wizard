@@ -11,9 +11,9 @@ project folder. Two front ends share one logic core:
 This replaces the old manual workflow (search fonts.google.com → download SVG →
 run a regex shell script → copy into the project).
 
-> **Status:** early build. The shared `core` package is implemented and tested;
-> the `cli` and `web` packages are next. See [`PLAN.md`](./PLAN.md) for the full
-> design and [roadmap](#roadmap).
+> **Status:** early build. The shared `core` package and the `cli` are
+> implemented and tested; the `web` app is next. See [`PLAN.md`](./PLAN.md) for
+> the full design and [roadmap](#roadmap).
 
 ## Repository layout
 
@@ -83,6 +83,26 @@ import {
 }
 ```
 
+## CLI (`packages/cli`)
+
+Non-interactive and scriptable. Add Material icons by name and/or custom SVGs
+by path; each is normalized to `currentColor` and written to `--out`.
+
+```bash
+# from the repo (not yet published to npm)
+node packages/cli/src/cli.js add lock lock_open menu --out ./src/assets/icons
+node packages/cli/src/cli.js add --file ./my-icon.svg --out ./src/assets/icons
+```
+
+- Unknown Material names print a warning to stderr and are skipped; the batch
+  continues.
+- **Conflicts:** an interactive terminal gets one batch confirmation before
+  overwriting; `--force` overwrites, `--skip-existing` keeps existing files. A
+  non-interactive run (pipe/CI) with neither flag skips-and-warns rather than
+  hanging on a prompt.
+- `--print` (alias `--verbose`) dumps raw and transformed source per icon;
+  `--no-transform` emits the raw SVG untouched. Run with `--help` for all flags.
+
 ## Development
 
 Requires Node.js 18+ (for native `fetch`).
@@ -103,6 +123,6 @@ npm test -w @material-icon-wizard/core
 ## Roadmap
 
 1. ✅ `core` — icon source, `normalizeSvg` transform, `prepareIcon` pipeline (+ tests)
-2. ⬜ `cli` — `add`/`export` commands, filesystem export with conflict handling
+2. ✅ `cli` — `add` command, filesystem export with conflict handling (+ tests)
 3. ⬜ `web` — search + gallery + color verification + inspector + export
 4. ⬜ CI/CD — GitHub Actions for test/lint and GitHub Pages deploy
