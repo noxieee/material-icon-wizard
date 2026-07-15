@@ -27,37 +27,43 @@ function retransformAll() {
 
 <template>
   <div class="app">
-    <header>
-      <h1>Material Icon Wizard</h1>
-      <p class="tagline">
-        Search, normalize to <code>currentColor</code>, verify, and export — Material icons and your
-        own SVGs.
-      </p>
-    </header>
+    <section class="block">
+      <header>
+        <h1>Material Icon Wizard</h1>
+        <p class="tagline">
+          Search, normalize to <code>currentColor</code>, verify, and export — Material icons and
+          your own SVGs.
+        </p>
+      </header>
 
-    <section class="controls">
-      <IconSearchBar :manifest="manifest" @add="store.addMaterial" />
-      <CustomUpload @upload="onUpload" />
+      <div class="controls">
+        <IconSearchBar :manifest="manifest" @add="store.addMaterial" />
+        <CustomUpload @upload="onUpload" />
+      </div>
+
+      <Message v-if="loading" severity="info" :closable="false" class="manifest-msg">
+        Loading icon manifest…
+      </Message>
+      <Message v-else-if="error" severity="error" :closable="false" class="manifest-msg">
+        Could not load the icon manifest: {{ error }}
+      </Message>
     </section>
 
-    <Message v-if="loading" severity="info" :closable="false">Loading icon manifest…</Message>
-    <Message v-else-if="error" severity="error" :closable="false">
-      Could not load the icon manifest: {{ error }}
-    </Message>
+    <section class="block">
+      <div v-if="store.items.length" class="toolbar">
+        <span class="count">{{ store.items.length }} icon(s)</span>
+        <span class="spacer"></span>
+        <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
+        <ExportPanel :items="store.items" />
+      </div>
 
-    <section v-if="store.items.length" class="toolbar">
-      <span class="count">{{ store.items.length }} icon(s)</span>
-      <span class="spacer"></span>
-      <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
-      <ExportPanel :items="store.items" />
+      <IconGallery
+        :items="store.items"
+        @remove="store.remove"
+        @retransform="store.retransform"
+        @inspect="inspected = $event"
+      />
     </section>
-
-    <IconGallery
-      :items="store.items"
-      @remove="store.remove"
-      @retransform="store.retransform"
-      @inspect="inspected = $event"
-    />
 
     <CodeInspector :item="inspected" @close="inspected = null" />
   </div>
@@ -68,6 +74,16 @@ function retransformAll() {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.25rem 4rem;
+}
+.block {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+.block + .block {
+  margin-top: 1.5rem;
 }
 header h1 {
   margin: 0;
@@ -80,16 +96,18 @@ header h1 {
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  margin-bottom: 1rem;
 }
 .controls > :first-child {
   flex: 1;
+}
+.manifest-msg {
+  margin-top: 1rem;
 }
 .toolbar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin: 1.25rem 0;
+  margin: 0 0 1.25rem;
   flex-wrap: wrap;
 }
 .spacer {
