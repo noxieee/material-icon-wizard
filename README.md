@@ -27,9 +27,9 @@ here and are committed together.
 ```
 material-icon-wizard/
   packages/
-    core/   # pure, isomorphic JS — shared logic (implemented)
-    cli/    # Node CLI, depends on core (planned)
-    web/    # Vue 3 + PrimeVue app, depends on core (planned)
+    core/   # pure, isomorphic JS — shared logic
+    cli/    # Node CLI, depends on core — published to npm as material-icon-wizard
+    web/    # Vue 3 + PrimeVue app, depends on core — deployed to GitHub Pages
   PLAN.md   # full design document
 ```
 
@@ -89,14 +89,24 @@ import {
 
 ## CLI (`packages/cli`)
 
-Non-interactive and scriptable. Add Material icons by name and/or custom SVGs
-by path; each is normalized to `currentColor` and written to `--out`.
+Published on npm as
+[**`material-icon-wizard`**](https://www.npmjs.com/package/material-icon-wizard).
+Non-interactive and scriptable. Add Material icons by name and/or custom SVGs by
+path; each is normalized to `currentColor` and written to `--out`.
 
 ```bash
-# from the repo (not yet published to npm)
-node packages/cli/src/cli.js add lock lock_open menu --out ./src/assets/icons
-node packages/cli/src/cli.js add --file ./my-icon.svg --out ./src/assets/icons
+# no install needed
+npx material-icon-wizard add lock lock_open menu --out ./src/assets/icons
+npx material-icon-wizard add --file ./my-icon.svg --out ./src/assets/icons
+
+# or install globally for the `icon-wizard` command
+npm install -g material-icon-wizard
+icon-wizard add lock lock_open menu --out ./src/assets/icons
 ```
+
+The published package is a single self-contained bundle (core + `svgson` inlined
+via esbuild). From a checkout you can also run it directly:
+`node packages/cli/src/cli.js add …`.
 
 - Unknown Material names print a warning to stderr and are skipped; the batch
   continues.
