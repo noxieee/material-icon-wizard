@@ -1,0 +1,22 @@
+{
+  "name": "@material-icon-wizard/cli",
+  "version": "0.0.0",
+  "description": "Non-interactive CLI: add Material icons (or custom SVGs) to a project folder, normalized to currentColor.",
+  "type": "module",
+  "bin": {
+    "icon-wizard": "src/cli.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@material-icon-wizard/core": "*"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}
