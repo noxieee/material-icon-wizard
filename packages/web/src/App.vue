@@ -1,7 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
+import ConfirmPopup from 'primevue/confirmpopup';
 import IconSearchBar from './components/IconSearchBar.vue';
 import CustomUpload from './components/CustomUpload.vue';
 import IconGallery from './components/IconGallery.vue';
@@ -13,6 +15,7 @@ import { useIconStore } from './store.js';
 
 const { manifest, loading, error, load } = useIconManifest();
 const store = useIconStore();
+const confirm = useConfirm();
 const inspected = ref(null);
 const previewColor = ref('#1e293b');
 
@@ -24,6 +27,17 @@ function onUpload({ name, rawSvg }) {
 
 function retransformAll() {
   store.items.forEach((item) => store.retransform(item));
+}
+
+function confirmRemoveAll(event) {
+  confirm.require({
+    target: event.currentTarget,
+    message: `Remove all ${store.items.length} selected icon(s)?`,
+    icon: 'pi pi-exclamation-triangle',
+    rejectProps: { label: 'Cancel', severity: 'secondary', text: true },
+    acceptProps: { label: 'Remove all', severity: 'danger' },
+    accept: () => store.clear(),
+  });
 }
 </script>
 
@@ -56,7 +70,13 @@ function retransformAll() {
         <span class="count">{{ store.items.length }} selected icon(s)</span>
         <span class="spacer"></span>
         <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
-        <Button label="Remove all" icon="pi pi-trash" severity="danger" text @click="store.clear" />
+        <Button
+          label="Remove all"
+          icon="pi pi-trash"
+          severity="danger"
+          text
+          @click="confirmRemoveAll"
+        />
         <span class="toolbar-divider" aria-hidden="true"></span>
         <ExportPanel :items="store.items" />
       </div>
@@ -73,6 +93,7 @@ function retransformAll() {
     </section>
 
     <CodeInspector :item="inspected" @close="inspected = null" />
+    <ConfirmPopup />
   </div>
 </template>
 

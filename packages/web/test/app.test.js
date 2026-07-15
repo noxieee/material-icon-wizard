@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
+import ConfirmationService from 'primevue/confirmationservice';
 import Tooltip from 'primevue/tooltip';
 import App from '../src/App.vue';
 import { useIconStore } from '../src/store.js';
@@ -32,7 +33,10 @@ function installFetchMock() {
 function mountApp() {
   return mount(App, {
     global: {
-      plugins: [[PrimeVue, { theme: { preset: Aura, options: { darkModeSelector: false } } }]],
+      plugins: [
+        [PrimeVue, { theme: { preset: Aura, options: { darkModeSelector: false } } }],
+        ConfirmationService,
+      ],
       directives: { tooltip: Tooltip },
     },
   });

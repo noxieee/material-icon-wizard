@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
+import ConfirmationService from 'primevue/confirmationservice';
 import Tooltip from 'primevue/tooltip';
 import 'primeicons/primeicons.css';
 import App from './App.vue';
@@ -16,5 +17,6 @@ createApp(App)
       options: { darkModeSelector: false },
     },
   })
+  .use(ConfirmationService)
   .directive('tooltip', Tooltip)
   .mount('#app');
