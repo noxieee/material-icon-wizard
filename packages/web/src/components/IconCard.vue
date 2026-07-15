@@ -107,7 +107,7 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
 }
 .name {
   font-family: ui-monospace, monospace;
-  font-size: 0.85rem;
+  font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

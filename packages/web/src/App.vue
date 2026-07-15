@@ -132,6 +132,6 @@ header h1 {
 }
 .count {
   color: var(--p-text-muted-color, #64748b);
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 </style>

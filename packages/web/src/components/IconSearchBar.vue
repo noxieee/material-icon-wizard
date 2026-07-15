@@ -47,7 +47,7 @@ function thumbUrl(name) {
   >
     <template #option="{ option }">
       <div class="suggestion">
-        <img :src="thumbUrl(option)" :alt="option" width="24" height="24" loading="lazy" />
+        <img :src="thumbUrl(option)" :alt="option" width="48" height="48" loading="lazy" />
         <span>{{ option }}</span>
       </div>
     </template>
@@ -61,7 +61,8 @@ function thumbUrl(name) {
 .suggestion {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
+  font-size: 1.05rem;
 }
 .suggestion img {
   flex: none;
