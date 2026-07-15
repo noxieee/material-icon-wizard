@@ -27,27 +27,20 @@ async function onFolder() {
 </script>
 
 <template>
-  <div class="export">
-    <Button
-      v-if="folderSupported"
-      label="Save to folder…"
-      icon="pi pi-folder-open"
-      severity="secondary"
-      :disabled="exportableCount === 0"
-      @click="onFolder"
-    />
-    <Button
-      label="Download .zip"
-      icon="pi pi-download"
-      :disabled="exportableCount === 0"
-      @click="onZip"
-    />
-  </div>
+  <!-- Multiple roots (no wrapper) so these buttons are direct toolbar flex
+       children and share its gap, rather than forming a separate group. -->
+  <Button
+    v-if="folderSupported"
+    label="Save to folder…"
+    icon="pi pi-folder-open"
+    severity="secondary"
+    :disabled="exportableCount === 0"
+    @click="onFolder"
+  />
+  <Button
+    label="Download .zip"
+    icon="pi pi-download"
+    :disabled="exportableCount === 0"
+    @click="onZip"
+  />
 </template>
-
-<style scoped>
-.export {
-  display: flex;
-  gap: 0.5rem;
-}
-</style>
