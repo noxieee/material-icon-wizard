@@ -1,5 +1,5 @@
 {
-  "name": "material-icon-wizard",
+  "name": "material-icon-wizard-monorepo",
   "version": "0.0.0",
   "private": true,
   "description": "Take Material icon names (or custom SVGs), verify, normalize fill to currentColor, and export — CLI + web, one shared core.",

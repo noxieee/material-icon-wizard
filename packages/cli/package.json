@@ -1,22 +1,43 @@
 {
-  "name": "@material-icon-wizard/cli",
-  "version": "0.0.0",
-  "description": "Non-interactive CLI: add Material icons (or custom SVGs) to a project folder, normalized to currentColor.",
+  "name": "material-icon-wizard",
+  "version": "0.1.0",
+  "description": "CLI to add Material Icons (or custom SVGs) to a project, normalized so their color follows CSS currentColor.",
+  "keywords": [
+    "material-icons",
+    "material-design",
+    "svg",
+    "currentcolor",
+    "icons",
+    "cli"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/noxieee/material-icon-wizard#readme",
+  "bugs": "https://github.com/noxieee/material-icon-wizard/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noxieee/material-icon-wizard.git",
+    "directory": "packages/cli"
+  },
   "type": "module",
   "bin": {
-    "icon-wizard": "src/cli.js"
+    "icon-wizard": "dist/cli.js",
+    "material-icon-wizard": "dist/cli.js"
   },
   "files": [
-    "src"
+    "dist"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
+    "build": "esbuild src/cli.js --bundle --platform=node --format=esm --target=node18 --outfile=dist/cli.js",
+    "prepublishOnly": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "dependencies": {
-    "@material-icon-wizard/core": "*"
-  },
   "devDependencies": {
+    "@material-icon-wizard/core": "*",
+    "esbuild": "^0.25.0",
     "vitest": "^3.0.0"
   }
 }
