@@ -57,6 +57,10 @@ function remove(id) {
   if (idx !== -1) items.splice(idx, 1);
 }
 
+function clear() {
+  items.splice(0, items.length);
+}
+
 export function useIconStore() {
-  return { items, addMaterial, addCustom, retransform, remove };
+  return { items, addMaterial, addCustom, retransform, remove, clear };
 }
