@@ -1,0 +1,27 @@
+{
+  "name": "material-icon-wizard",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Take Material icon names (or custom SVGs), verify, normalize fill to currentColor, and export — CLI + web, one shared core.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
