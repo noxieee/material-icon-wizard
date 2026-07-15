@@ -29,18 +29,18 @@ async function onFolder() {
 <template>
   <div class="export">
     <Button
-      label="Download .zip"
-      icon="pi pi-download"
-      :disabled="exportableCount === 0"
-      @click="onZip"
-    />
-    <Button
       v-if="folderSupported"
       label="Save to folder…"
       icon="pi pi-folder-open"
       severity="secondary"
       :disabled="exportableCount === 0"
       @click="onFolder"
+    />
+    <Button
+      label="Download .zip"
+      icon="pi pi-download"
+      :disabled="exportableCount === 0"
+      @click="onZip"
     />
   </div>
 </template>

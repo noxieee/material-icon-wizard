@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
+import Divider from 'primevue/divider';
 import IconSearchBar from './components/IconSearchBar.vue';
 import CustomUpload from './components/CustomUpload.vue';
 import IconGallery from './components/IconGallery.vue';
@@ -57,12 +58,13 @@ function retransformAll() {
         <span class="spacer"></span>
         <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
         <Button
-          label="Delete all"
+          label="Remove all"
           icon="pi pi-trash"
           severity="danger"
           outlined
           @click="store.clear"
         />
+        <Divider layout="vertical" />
         <ExportPanel :items="store.items" />
       </div>
 
