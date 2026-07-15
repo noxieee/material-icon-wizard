@@ -2,7 +2,6 @@
 import { onMounted, ref } from 'vue';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
-import Divider from 'primevue/divider';
 import IconSearchBar from './components/IconSearchBar.vue';
 import CustomUpload from './components/CustomUpload.vue';
 import IconGallery from './components/IconGallery.vue';
@@ -57,14 +56,8 @@ function retransformAll() {
         <span class="count">{{ store.items.length }} selected icon(s)</span>
         <span class="spacer"></span>
         <Button label="Re-transform all" icon="pi pi-refresh" text @click="retransformAll" />
-        <Button
-          label="Remove all"
-          icon="pi pi-trash"
-          severity="danger"
-          outlined
-          @click="store.clear"
-        />
-        <Divider layout="vertical" />
+        <Button label="Remove all" icon="pi pi-trash" severity="danger" @click="store.clear" />
+        <span class="toolbar-divider" aria-hidden="true"></span>
         <ExportPanel :items="store.items" />
       </div>
 
@@ -126,6 +119,13 @@ header h1 {
 }
 .color-tester-row {
   margin-bottom: 1.25rem;
+}
+/* A 1px separator that stretches to the toolbar row height (i.e. the buttons). */
+.toolbar-divider {
+  align-self: stretch;
+  width: 1px;
+  background: var(--p-content-border-color, #cbd5e1);
+  margin: 0 0.25rem;
 }
 .spacer {
   flex: 1;
