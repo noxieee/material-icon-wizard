@@ -11,9 +11,10 @@ project folder. Two front ends share one logic core:
 This replaces the old manual workflow (search fonts.google.com → download SVG →
 run a regex shell script → copy into the project).
 
-> **Status:** early build. The shared `core` package and the `cli` are
-> implemented and tested; the `web` app is next. See [`PLAN.md`](./PLAN.md) for
-> the full design and [roadmap](#roadmap).
+> **Status:** the shared `core` package, the `cli`, and the `web` app are all
+> implemented and tested; CI/CD (GitHub Actions + Pages deploy) is the last
+> remaining piece. See [`PLAN.md`](./PLAN.md) for the full design and
+> [roadmap](#roadmap).
 
 ## Repository layout
 
@@ -103,6 +104,34 @@ node packages/cli/src/cli.js add --file ./my-icon.svg --out ./src/assets/icons
 - `--print` (alias `--verbose`) dumps raw and transformed source per icon;
   `--no-transform` emits the raw SVG untouched. Run with `--help` for all flags.
 
+## Web app (`packages/web`)
+
+Vue 3 + PrimeVue single-page app (Vite), meant for GitHub Pages. Same feature
+set as the CLI in a GUI:
+
+- **Search & add** — a type-ahead (`AutoComplete`) backed by the cached
+  manifest; suggestions show CDN thumbnails, clicking one adds it to the
+  gallery. Only ever suggests names that exist.
+- **Custom upload** — pick `.svg` files; they run through the same
+  normalization pipeline as Material icons.
+- **Gallery** — each icon rendered inline as real DOM SVG, with a status badge,
+  a warnings badge, and remove / re-transform / inspect actions.
+- **Color verification** — per-card swatches and a native color picker change
+  the wrapper's CSS `color`; `currentColor` follows it, proving the transform
+  live for filled and outlined icons.
+- **Inspector** — a dialog showing raw vs. transformed source side by side.
+- **Export** — download a `.zip` (all browsers, via `fflate`), or, where the
+  File System Access API exists (Chrome/Edge), write straight into a chosen
+  folder with an overwrite prompt on collisions.
+
+```bash
+npm run dev -w @material-icon-wizard/web      # local dev server
+npm run build -w @material-icon-wizard/web    # production build to dist/
+```
+
+The manifest is fetched once and cached in `localStorage`, keyed by version so a
+version bump invalidates a stale cache. Icons are fetched live from jsDelivr.
+
 ## Development
 
 Requires Node.js 18+ (for native `fetch`).
@@ -124,5 +153,5 @@ npm test -w @material-icon-wizard/core
 
 1. ✅ `core` — icon source, `normalizeSvg` transform, `prepareIcon` pipeline (+ tests)
 2. ✅ `cli` — `add` command, filesystem export with conflict handling (+ tests)
-3. ⬜ `web` — search + gallery + color verification + inspector + export
+3. ✅ `web` — search + gallery + color verification + inspector + export (+ tests)
 4. ⬜ CI/CD — GitHub Actions for test/lint and GitHub Pages deploy
