@@ -37,6 +37,7 @@ function thumbUrl(name) {
     :suggestions="suggestions"
     :delay="200"
     :disabled="!manifest"
+    scroll-height="420px"
     dropdown
     placeholder="Search Material icons…"
     class="search"
