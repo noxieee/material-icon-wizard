@@ -1,0 +1,23 @@
+{
+  "name": "@material-icon-wizard/core",
+  "version": "0.0.0",
+  "description": "Isomorphic core: manifest/existence, SVG normalize-to-currentColor transform, and the fetch→transform pipeline shared by the CLI and web app.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "svgson": "^5.3.1"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}
