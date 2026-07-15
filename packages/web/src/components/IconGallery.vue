@@ -3,6 +3,7 @@ import IconCard from './IconCard.vue';
 
 defineProps({
   items: { type: Array, required: true },
+  previewColor: { type: String, default: '#1e293b' },
 });
 const emit = defineEmits(['remove', 'retransform', 'inspect']);
 </script>
@@ -16,6 +17,7 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
       v-for="item in items"
       :key="item.id"
       :item="item"
+      :preview-color="previewColor"
       @remove="emit('remove', $event)"
       @retransform="emit('retransform', $event)"
       @inspect="emit('inspect', $event)"

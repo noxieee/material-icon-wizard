@@ -1,22 +1,18 @@
 <script setup>
-import { ref } from 'vue';
 import Button from 'primevue/button';
 import Badge from 'primevue/badge';
 
 defineProps({
   item: { type: Object, required: true },
+  // Shared across all cards; the wrapper's CSS `color` that currentColor follows.
+  previewColor: { type: String, default: '#1e293b' },
 });
 const emit = defineEmits(['remove', 'retransform', 'inspect']);
-
-const SWATCHES = ['#1e293b', '#2563eb', '#dc2626', '#16a34a', '#d97706'];
-// The wrapper's CSS `color` — currentColor in the SVG inherits it, so changing
-// this instantly proves the transform works, for filled and outlined icons.
-const color = ref(SWATCHES[0]);
 </script>
 
 <template>
   <div class="card">
-    <div class="preview" :style="{ color }">
+    <div class="preview" :style="{ color: previewColor }">
       <!-- Trusted CDN output / the user's own uploaded file; rendered inline so
            currentColor resolves against the wrapper color above. -->
       <!-- eslint-disable vue/no-v-html -->
@@ -42,19 +38,6 @@ const color = ref(SWATCHES[0]);
     </div>
 
     <p v-if="item.status === 'error'" class="err-msg">{{ item.errorMessage }}</p>
-
-    <div class="swatches">
-      <button
-        v-for="s in SWATCHES"
-        :key="s"
-        class="swatch"
-        :class="{ active: color === s }"
-        :style="{ background: s }"
-        :aria-label="`Preview in ${s}`"
-        @click="color = s"
-      ></button>
-      <input v-model="color" type="color" aria-label="Custom preview color" />
-    </div>
 
     <div class="actions">
       <Button
@@ -138,30 +121,6 @@ const color = ref(SWATCHES[0]);
   margin: 0;
   font-size: 0.75rem;
   color: var(--p-red-500, #ef4444);
-}
-.swatches {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.swatch {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  padding: 0;
-}
-.swatch.active {
-  border-color: var(--p-primary-color, #3b82f6);
-}
-.swatches input[type='color'] {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
 }
 .actions {
   display: flex;

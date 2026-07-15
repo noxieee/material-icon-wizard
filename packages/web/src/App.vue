@@ -7,12 +7,14 @@ import CustomUpload from './components/CustomUpload.vue';
 import IconGallery from './components/IconGallery.vue';
 import CodeInspector from './components/CodeInspector.vue';
 import ExportPanel from './components/ExportPanel.vue';
+import ColorTester from './components/ColorTester.vue';
 import { useIconManifest } from './useIconManifest.js';
 import { useIconStore } from './store.js';
 
 const { manifest, loading, error, load } = useIconManifest();
 const store = useIconStore();
 const inspected = ref(null);
+const previewColor = ref('#1e293b');
 
 onMounted(load);
 
@@ -57,8 +59,11 @@ function retransformAll() {
         <ExportPanel :items="store.items" />
       </div>
 
+      <ColorTester v-if="store.items.length" v-model="previewColor" class="color-tester-row" />
+
       <IconGallery
         :items="store.items"
+        :preview-color="previewColor"
         @remove="store.remove"
         @retransform="store.retransform"
         @inspect="inspected = $event"
@@ -109,6 +114,9 @@ header h1 {
   gap: 0.75rem;
   margin: 0 0 1.25rem;
   flex-wrap: wrap;
+}
+.color-tester-row {
+  margin-bottom: 1.25rem;
 }
 .spacer {
   flex: 1;
