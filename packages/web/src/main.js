@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
+import Tooltip from 'primevue/tooltip';
 import 'primeicons/primeicons.css';
 import App from './App.vue';
 import './style.css';
@@ -15,4 +16,5 @@ createApp(App)
       options: { darkModeSelector: false },
     },
   })
+  .directive('tooltip', Tooltip)
   .mount('#app');

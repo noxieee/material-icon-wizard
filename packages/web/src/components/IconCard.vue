@@ -58,6 +58,7 @@ const color = ref(SWATCHES[0]);
 
     <div class="actions">
       <Button
+        v-tooltip.top="'Inspect source'"
         icon="pi pi-code"
         text
         rounded
@@ -66,6 +67,7 @@ const color = ref(SWATCHES[0]);
         @click="emit('inspect', item)"
       />
       <Button
+        v-tooltip.top="'Re-run transform'"
         icon="pi pi-refresh"
         text
         rounded
@@ -74,6 +76,7 @@ const color = ref(SWATCHES[0]);
         @click="emit('retransform', item)"
       />
       <Button
+        v-tooltip.top="'Remove'"
         icon="pi pi-trash"
         text
         rounded
