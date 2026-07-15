@@ -13,6 +13,7 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
 <template>
   <div class="card">
     <div class="preview" :style="{ color: previewColor }">
+      <Badge v-if="item.source === 'custom'" value="custom" severity="info" class="corner-badge" />
       <!-- Trusted CDN output / the user's own uploaded file; rendered inline so
            currentColor resolves against the wrapper color above. -->
       <!-- eslint-disable vue/no-v-html -->
@@ -29,7 +30,6 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
     <div class="meta">
       <span class="name" :title="item.name">{{ item.name }}</span>
       <span class="badges">
-        <Badge v-if="item.source === 'custom'" value="custom" severity="info" />
         <Badge v-if="item.status === 'error'" value="error" severity="danger" />
         <span v-if="item.warnings.length" :title="item.warnings.join('\n')">
           <Badge :value="`⚠ ${item.warnings.length}`" severity="warn" />
@@ -82,12 +82,23 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
   background: var(--p-content-background, #fff);
 }
 .preview {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 96px;
   border-radius: 8px;
   background: var(--p-surface-100, #f1f5f9);
+}
+.preview .corner-badge {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  font-size: 0.6rem;
+  min-width: auto;
+  height: auto;
+  padding: 0.05rem 0.35rem;
+  line-height: 1.4;
 }
 .preview :deep(svg) {
   width: 48px;
