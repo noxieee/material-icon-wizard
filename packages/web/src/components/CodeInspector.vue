@@ -21,10 +21,23 @@ function onVisibility(visible) {
   <Dialog
     :visible="!!item"
     modal
-    :header="item ? item.name : ''"
     :style="{ width: '90vw', maxWidth: '900px' }"
     @update:visible="onVisibility"
   >
+    <template #header>
+      <span v-if="item" class="dialog-title">
+        <!-- eslint-disable vue/no-v-html -->
+        <!-- transformed (or raw) SVG from the trusted pipeline; sized down as a glyph -->
+        <span
+          v-if="item.transformedSvg || item.rawSvg"
+          class="title-icon"
+          v-html="item.transformedSvg ?? item.rawSvg"
+        ></span>
+        <!-- eslint-enable vue/no-v-html -->
+        <span class="title-name">{{ item.name }}</span>
+      </span>
+    </template>
+
     <div v-if="item" class="inspector">
       <p v-if="diff" class="legend">
         <span class="chip del">removed</span>
@@ -52,6 +65,19 @@ function onVisibility(visible) {
 </template>
 
 <style scoped>
+.dialog-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+.title-icon {
+  display: inline-flex;
+}
+.title-icon :deep(svg) {
+  width: 20px;
+  height: 20px;
+}
 .legend {
   display: flex;
   gap: 0.5rem;
