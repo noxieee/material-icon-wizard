@@ -144,7 +144,7 @@ function onVisibility(visible) {
 .col-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.25rem;
   margin-bottom: 0.5rem;
 }
 h4 {
