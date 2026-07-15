@@ -86,7 +86,7 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 96px;
+  height: 128px;
   border-radius: 8px;
   background: var(--p-surface-100, #f1f5f9);
 }
@@ -94,15 +94,15 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
   position: absolute;
   top: 0.4rem;
   right: 0.4rem;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   min-width: auto;
   height: auto;
-  padding: 0.05rem 0.35rem;
+  padding: 0.08rem 0.45rem;
   line-height: 1.4;
 }
 .preview :deep(svg) {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
 }
 .big {
   font-size: 2rem;
