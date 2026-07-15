@@ -1,6 +1,6 @@
 {
   "name": "material-icon-wizard",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CLI to add Material Icons (or custom SVGs) to a project, normalized so their color follows CSS currentColor.",
   "keywords": [
     "material-icons",
@@ -20,6 +20,7 @@
   },
   "type": "module",
   "bin": {
+    "material-icon-wizard": "dist/cli.js",
     "icon-wizard": "dist/cli.js"
   },
   "files": [
