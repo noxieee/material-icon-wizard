@@ -73,7 +73,7 @@ header h1 {
   margin: 0;
 }
 .tagline {
-  margin: 0.25rem 0 1.5rem;
+  margin: 0.75rem 0 1.5rem;
   color: #475569;
 }
 .controls {
