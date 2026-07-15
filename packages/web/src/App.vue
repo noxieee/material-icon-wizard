@@ -74,7 +74,7 @@ header h1 {
 }
 .tagline {
   margin: 0.25rem 0 1.5rem;
-  color: var(--p-text-muted-color, #64748b);
+  color: #475569;
 }
 .controls {
   display: flex;
