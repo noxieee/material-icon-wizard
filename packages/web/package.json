@@ -14,6 +14,7 @@
   "dependencies": {
     "@material-icon-wizard/core": "*",
     "@primevue/themes": "^4.2.5",
+    "diff": "^7.0.0",
     "fflate": "^0.8.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.5",
