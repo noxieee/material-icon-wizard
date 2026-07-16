@@ -306,16 +306,21 @@ Same feature set, browser-native versions:
    enhancement.
 7. CI/CD: GitHub Actions workflows for test/lint and GitHub Pages deploy.
 
-## Open questions / TBD
+## Open questions / TBD (status as built)
 
-- ~~Exact behavior of "strip XML prolog"~~ — resolved: serializing from the `<svg>` node drops the
-  prolog, DOCTYPE, and any leading comments as a side effect, so there's no separate edge-case
-  surface to specify.
-- Runtime CDN dependency: the deployed web app fetches the manifest and every icon from jsDelivr
-  live, so it's only as available as jsDelivr (CORS confirmed open). No fetch retry/backoff is
-  planned for v1 — worth adding if flakiness shows up.
-- CLI distribution: run locally from the repo (`node packages/cli/src/cli.js ...`), or published
-  to npm for `npx icon-wizard ...` usage? Not decided yet — doesn't block early implementation.
-- Whether other icon styles (outline/sharp/etc.) should be supported later, or `round` only is
-  permanent — API keeps `style` as a parameter (`getIconUrl(name, version, style)`) rather than
-  hardcoding it inline, so adding a style selector later is a small change, not a redesign.
+- ~~Exact behavior of "strip XML prolog"~~ — **resolved & shipped**: serializing from the `<svg>`
+  node drops the prolog, DOCTYPE, and any leading comments as a side effect, so there was no
+  separate edge-case surface to specify. Covered by `core`'s transform tests.
+- ~~CLI distribution~~ — **resolved**: published to npm as the unscoped package
+  **`material-icon-wizard`** (`npx material-icon-wizard add ...`, or global install for the
+  `icon-wizard` command). The published artifact is a single self-contained esbuild bundle with
+  `core` + `svgson` inlined, so `core` never had to be published separately. (Note: the package
+  needs a `bin` entry matching its own name for bare `npx material-icon-wizard` to resolve.)
+- Runtime CDN dependency: the deployed web app still fetches the manifest and every icon from
+  jsDelivr live (CORS confirmed open). **No fetch retry/backoff was added** — still worth adding if
+  flakiness shows up. Partly mitigated in practice: the manifest is cached in `localStorage` (keyed
+  by version) and the user's selected icons are persisted across reloads, so a returning session
+  doesn't re-hit the CDN for those.
+- Other icon styles (outline/sharp/etc.): **still `round` only** — no style selector was built. The
+  API kept `style` as a parameter (`getIconUrl(name, version, style)`, `getIconManifest(version,
+  style)`), so adding a selector later remains a small change, not a redesign.
