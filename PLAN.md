@@ -316,11 +316,11 @@ Same feature set, browser-native versions:
   `icon-wizard` command). The published artifact is a single self-contained esbuild bundle with
   `core` + `svgson` inlined, so `core` never had to be published separately. (Note: the package
   needs a `bin` entry matching its own name for bare `npx material-icon-wizard` to resolve.)
-- Runtime CDN dependency: the deployed web app still fetches the manifest and every icon from
-  jsDelivr live (CORS confirmed open). **No fetch retry/backoff was added** — still worth adding if
-  flakiness shows up. Partly mitigated in practice: the manifest is cached in `localStorage` (keyed
-  by version) and the user's selected icons are persisted across reloads, so a returning session
-  doesn't re-hit the CDN for those.
-- Other icon styles (outline/sharp/etc.): **still `round` only** — no style selector was built. The
-  API kept `style` as a parameter (`getIconUrl(name, version, style)`, `getIconManifest(version,
-  style)`), so adding a selector later remains a small change, not a redesign.
+- Runtime CDN dependency: the deployed web app fetches the manifest and every icon from jsDelivr
+  live (CORS confirmed open). **No fetch retry/backoff exists** — worth adding if flakiness shows
+  up. Partly mitigated in practice: the manifest is cached in `localStorage` (keyed by version) and
+  the user's selected icons are persisted across reloads, so a returning session doesn't re-hit the
+  CDN for those.
+- Other icon styles (outline/sharp/etc.): only `round` is supported — no style selector exists. The
+  API keeps `style` as a parameter (`getIconUrl(name, version, style)`, `getIconManifest(version,
+  style)`), so adding a selector later is a small change, not a redesign.
