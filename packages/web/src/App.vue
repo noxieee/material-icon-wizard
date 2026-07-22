@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from 'primevue/button';
 import Message from 'primevue/message';
@@ -18,6 +18,9 @@ const store = useIconStore();
 const confirm = useConfirm();
 const inspected = ref(null);
 const previewColor = ref('#1e293b');
+const selectedMaterialNames = computed(
+  () => new Set(store.items.filter((i) => i.source === 'material').map((i) => i.name)),
+);
 
 onMounted(load);
 
@@ -53,7 +56,11 @@ function confirmRemoveAll(event) {
       </header>
 
       <div class="controls">
-        <IconSearchBar :manifest="manifest" @add="store.addMaterial" />
+        <IconSearchBar
+          :manifest="manifest"
+          :selected="selectedMaterialNames"
+          @add="store.addMaterial"
+        />
         <CustomUpload @upload="onUpload" />
       </div>
 
@@ -87,7 +94,6 @@ function confirmRemoveAll(event) {
         :items="store.items"
         :preview-color="previewColor"
         @remove="store.remove"
-        @retransform="store.retransform"
         @inspect="inspected = $event"
       />
     </section>

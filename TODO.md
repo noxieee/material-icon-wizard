@@ -32,7 +32,7 @@ note for reference.
 
 ## Gallery cards (web)
 
-- [ ] **Rethink the per-card "re-run transform" action** — it doesn't make sense
+- [x] **Rethink the per-card "re-run transform" action** — it doesn't make sense
       on an individual card. Instead, visually mark cards that don't yet have a
       transformation.
       _("re-run transform na kartě ikony mi nějak nedává smysl. Označil bych karty, které ještě

@@ -5,7 +5,7 @@ defineProps({
   items: { type: Array, required: true },
   previewColor: { type: String, default: '#1e293b' },
 });
-const emit = defineEmits(['remove', 'retransform', 'inspect']);
+const emit = defineEmits(['remove', 'inspect']);
 </script>
 
 <template>
@@ -19,7 +19,6 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
       :item="item"
       :preview-color="previewColor"
       @remove="emit('remove', $event)"
-      @retransform="emit('retransform', $event)"
       @inspect="emit('inspect', $event)"
     />
   </div>

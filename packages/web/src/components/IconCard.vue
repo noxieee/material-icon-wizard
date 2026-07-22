@@ -7,7 +7,7 @@ defineProps({
   // Shared across all cards; the wrapper's CSS `color` that currentColor follows.
   previewColor: { type: String, default: '#1e293b' },
 });
-const emit = defineEmits(['remove', 'retransform', 'inspect']);
+const emit = defineEmits(['remove', 'inspect']);
 </script>
 
 <template>
@@ -48,15 +48,6 @@ const emit = defineEmits(['remove', 'retransform', 'inspect']);
         severity="secondary"
         aria-label="Inspect source"
         @click="emit('inspect', item)"
-      />
-      <Button
-        v-tooltip.top="'Re-run transform'"
-        icon="pi pi-refresh"
-        text
-        rounded
-        severity="secondary"
-        aria-label="Re-run transform"
-        @click="emit('retransform', item)"
       />
       <Button
         v-tooltip.top="'Remove'"
