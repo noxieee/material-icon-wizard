@@ -18,12 +18,12 @@ note for reference.
 
 ## Search / add flow (web)
 
-- [ ] **Exclude already-selected icons from the autocomplete** suggestions.
+- [x] **Exclude already-selected icons from the autocomplete** suggestions.
       _("ikony které jsou již vybrané by neměli být v autocomplete")_
 - [ ] **Replace the dropdown suggestion list with a grid / picker.** The current
       vertical dropdown is space-inefficient for browsing icons.
       _("mít ty ikony v dropdown je prostorově neúsporné. Spíš by tam byl grid nebo možná picker")_
-- [ ] **Keep the search open after selecting so several icons can be added from
+- [x] **Keep the search open after selecting so several icons can be added from
       one query.** Right now, typing e.g. "arrow", picking "left", then wanting
       "right" fails — the dropdown closes and the search clears. Also improve
       keyboard/arrow-key control for speed.
