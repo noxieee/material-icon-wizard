@@ -58,7 +58,7 @@ async function main(argv) {
   try {
     parsed = parse(argv);
   } catch (err) {
-    throw new Error(`${err.message}\n\n${HELP}`);
+    throw new Error(`${err.message}\n\n${HELP}`, { cause: err });
   }
   const { values, positionals } = parsed;
 

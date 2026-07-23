@@ -12,8 +12,13 @@ note for reference.
       sources may be added later, so the name shouldn't be tied to Material Icons.
       Touches: package names, repo/GitHub Pages base path, npm package, docs.
       _("název projektu víc generický (bez material). Možno bude i jiný source.")_
-- [ ] **Audit and update dependencies** — several flagged as outdated by years;
-      review and bump.
+- [x] **Audit and update dependencies** — several flagged as outdated by years;
+      review and bump. Bumped vue, prettier, esbuild, the eslint 9→10 toolchain,
+      vitest 3→4, vite 6→8/@vitejs/plugin-vue 5→6/jsdom 25→29, and diff 7→9.
+      PrimeVue/@primevue/themes/primeicons held at 4.x/7.x: PrimeVue 5 requires a
+      PrimeUI license key (free community tier exists but needs signup at
+      primeui.dev) or the app shows an "Invalid PrimeUI License" banner —
+      revisit once that's set up.
       _("updatovat knihovny. Hodně věcí outdated několik let")_
 
 ## Search / add flow (web)

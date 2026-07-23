@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@material-icon-wizard/core": "*",
-    "esbuild": "^0.25.0",
-    "vitest": "^3.0.0"
+    "esbuild": "^0.28.1",
+    "vitest": "^4.1.10"
   }
 }

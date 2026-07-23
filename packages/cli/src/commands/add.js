@@ -49,7 +49,7 @@ export async function runAdd(names, opts) {
     try {
       manifest = await getIconManifest(opts.iconVersion, opts.style);
     } catch (err) {
-      throw new Error(`could not fetch icon manifest: ${err.message}`);
+      throw new Error(`could not fetch icon manifest: ${err.message}`, { cause: err });
     }
     for (const name of names) {
       if (!iconExists(name, manifest)) {

@@ -131,7 +131,7 @@ export async function normalizeSvg(svgText) {
   try {
     root = await parse(svgText);
   } catch (err) {
-    throw new Error(`Could not parse SVG: ${err.message}`);
+    throw new Error(`Could not parse SVG: ${err.message}`, { cause: err });
   }
   if (!root || root.name !== 'svg') {
     throw new Error('Input does not contain a root <svg> element');
